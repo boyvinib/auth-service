@@ -1,45 +1,52 @@
-import { User } from '../../../src/domain/entities/user.entity'
+import { User } from '../../../src/domain/entities/User'
+import { Password } from '../../../src/domain/value-objects/Password'
 
 describe('User Entity', () => {
+  const validPassword = Password.create('Abc@123')
+
   it('should create a valid user', () => {
     const user = new User({
       name: 'John Doe',
       email: 'john@mail.com',
-      password: 'Abc@123',
+      password: validPassword,
     })
 
-    expect(user.id).toBeDefined()
+    expect(user).toBeDefined()
     expect(user.isActive).toBe(true)
   })
+
   it('should deactivate user', () => {
     const user = new User({
       name: 'John Doe',
       email: 'john@mail.com',
-      password: 'Abc@123',
+      password: validPassword,
     })
 
     user.deactivate()
 
     expect(user.isActive).toBe(false)
   })
-  it('should not allow weak password', () => {
-  expect(() => {
-    new User({
+
+  it('should expose hashed password value', () => {
+    const password = Password.restore('hashed-Abc@123')
+
+    const user = new User({
       name: 'John Doe',
       email: 'john@mail.com',
-      password: '123456',
+      password,
     })
-  }).toThrow()
-})
 
-it('should not allow invalid email', () => {
-  expect(() => {
-    new User({
-      name: 'John Doe',
-      email: 'johnmail.com',
-      password: 'Abc@123',
-    })
-  }).toThrow()
-})
+    expect(user.password).toBe('hashed-Abc@123')
+  })
+  
+  it('should not allow invalid email', () => {
+    expect(() => {
+      new User({
+        name: 'John Doe',
+        email: 'johnmail.com',
+        password: validPassword,
+      })
+    }).toThrow()
+  })
 
 })

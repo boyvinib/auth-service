@@ -1,10 +1,11 @@
 import { randomUUID } from 'crypto'
+import { Password } from '../value-objects/Password';
 
 interface IUser {
   id?: string;
   name: string;
   email: string;
-  password: string;
+  password: Password;
   isActive?: boolean;
   createdAt?: Date;
 }
@@ -12,7 +13,7 @@ export class User {
     private _id: string
     private _name: string
     private _email: string
-    private _password: string
+     private _password: Password
     private _isActive: boolean
     private _createdAt: Date
 
@@ -30,7 +31,6 @@ export class User {
   private validate() {
     this.validateName()
     this.validateEmail()
-    this.validatePassword()
   }
 
   private validateName() {
@@ -47,17 +47,6 @@ export class User {
     }
   }
 
-  private validatePassword() {
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/
-
-    if (!passwordRegex.test(this._password)) {
-      throw new Error(
-        'Password must contain uppercase, lowercase, number and special character'
-      )
-    }
-  }
-
   get id(): string {
     return this._id;
   }
@@ -71,7 +60,7 @@ export class User {
   }
 
   get password(): string {
-    return this._password;
+    return this._password.value
   }
 
   get isActive(): boolean {
