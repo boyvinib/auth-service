@@ -18,8 +18,8 @@ const folders = [
 
   'src/main',
 
-  'src/tests/unit',
-  'src/tests/integration'
+  'tests/unit',
+  'tests/integration'
 ]
 
 folders.forEach(folder => {
