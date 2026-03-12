@@ -2,8 +2,9 @@ import { UserRepository } from '../../../domain/repositories/UserRepository'
 import { PasswordHasher } from '../../../domain/services/PasswordHasher'
 import { TokenGenerator } from '../../../domain/services/TokenGenerator'
 import { AuthenticateUserDTO } from '../../dtos/AuthenticateUserDTO'
+import { IAuthenticateUserUseCase } from './IAuthenticateUserUseCase'
 
-export class AuthenticateUserUseCase {
+export class AuthenticateUserUseCase implements IAuthenticateUserUseCase {
   constructor(
     private userRepository: UserRepository,
     private passwordHasher: PasswordHasher,

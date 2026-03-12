@@ -8,7 +8,7 @@ import { healthRoutes } from './routes/health.routes'
 dotenv.config()
 
 export const app = Fastify({
-  logger: true,
+  logger: false,
 })
 
 app.register(swagger, {

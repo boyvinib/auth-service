@@ -1,20 +1,24 @@
-import { Request, Response } from 'express'
-import { CreateUserUseCase } from '../../../application/use-cases/create-user/CreateUserUseCase'
+import { ICreateUserUseCase } from '../../../application/use-cases/create-user/ICreateUserUseCase'
+import { HttpRequest, HttpResponse } from '../protocols/Http'
 
 export class CreateUserController {
-  constructor(private readonly useCase: CreateUserUseCase) {}
+  constructor(private readonly useCase: ICreateUserUseCase) {}
 
-  async handle(req: Request, res: Response): Promise<Response> {
+  async handle(request: HttpRequest): Promise<HttpResponse> {
     try {
-      const { name, email, password } = req.body
+      const { name, email, password } = request.body!
 
       await this.useCase.execute({ name, email, password })
 
-      return res.status(201).send()
+      return {
+        statusCode: 201,
+        body: { message: 'User created successfully' },
+      }
     } catch (error: any) {
-      return res.status(400).json({
-        message: error.message,
-      })
+      return {
+        statusCode: 400,
+        body: { message: error.message },
+      }
     }
   }
 }

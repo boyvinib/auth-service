@@ -3,8 +3,9 @@ import { Password } from '../../../domain/value-objects/Password'
 import { UserRepository } from '../../../domain/repositories/UserRepository'
 import { PasswordHasher } from '../../../domain/services/PasswordHasher'
 import { CreateUserDTO } from '../../dtos/CreateUserDTO'
+import { ICreateUserUseCase } from './ICreateUserUseCase'
 
-export class CreateUserUseCase {
+export class CreateUserUseCase implements ICreateUserUseCase {
   constructor(
     private userRepository: UserRepository,
     private passwordHasher: PasswordHasher

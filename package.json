@@ -7,6 +7,7 @@
     "dev": "ts-node-dev --respawn --transpile-only src/main/index.ts",
     "build": "tsc",
     "start": "node dist/main/index.js",
+    "migration": "ts-node src/infrastructure/database/postgres/migrate.ts",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint:fix": "eslint --fix src --ext .ts,.js"
@@ -21,7 +22,8 @@
     "bcrypt": "^6.0.0",
     "dotenv": "^17.2.3",
     "fastify": "^5.6.2",
-    "jsonwebtoken": "^9.0.3"
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.20.0"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
@@ -29,6 +31,7 @@
     "@types/jest": "^30.0.0",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^25.0.3",
+    "@types/pg": "^8.18.0",
     "@typescript-eslint/eslint-plugin": "^8.50.1",
     "@typescript-eslint/parser": "^8.50.1",
     "eslint": "^9.39.2",

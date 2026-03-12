@@ -1,8 +1,8 @@
-import { AuthenticateUserUseCase } from '../../../application/use-cases/authenticate-user/AuthenticateUserUseCase'
+import { IAuthenticateUserUseCase } from '../../../application/use-cases/authenticate-user/IAuthenticateUserUseCase'
 import { HttpRequest, HttpResponse } from '../protocols/Http'
 
 export class AuthenticateUserController {
-  constructor(private readonly useCase: AuthenticateUserUseCase) {}
+  constructor(private readonly useCase: IAuthenticateUserUseCase) {}
 
   async handle(request: HttpRequest): Promise<HttpResponse> {
     try {
